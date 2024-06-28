@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Film - Movie Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* CSS kustom di sini */
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-500 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Movie Website</h1>
+            <a href="index.html" class="text-lg font-medium">Home</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Contoh film item -->
+        <div class="bg-white p-6 shadow-lg rounded-lg">
+            <h2 class="text-xl font-bold mb-2">Inception</h2>
+            <p class="text-gray-600">Sci-Fi, Action</p>
+            <button onclick="showMovieDetails('inception')" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Lihat Detail</button>
+        </div>
+        <!-- Tambahkan film lainnya di sini -->
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4 mt-8">
+        <div class="container mx-auto text-center">
+            &copy; 2024 Movie Website. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Function untuk menampilkan detail film dari JSON
+        function showMovieDetails(movieId) {
+            fetch('movies.json')
+                .then(response => response.json())
+                .then(data => {
+                    const movie = data[movieId];
+                    document.getElementById('movie-title').textContent = movie.title;
+                    document.getElementById('movie-description').textContent = movie.description;
+                    document.getElementById('movie-director').textContent = `Director: ${movie.director}`;
+                    document.getElementById('movie-year').textContent = `Year: ${movie.year}`;
+                    document.getElementById('movie-genre').textContent = `Genre: ${movie.genre}`;
+                    document.getElementById('movie-cast').textContent = `Cast: ${movie.cast}`;
+                    document.getElementById('movie-rating').textContent = `Rating: ${movie.rating}`;
+                })
+                .catch(error => console.error('Error fetching movie data:', error));
+        }
+    </script>
+</body>
+</html>
